@@ -6,8 +6,172 @@
     xmlns:local="clr-namespace:GitUserControlUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
-    Width="800"
-    Height="450"
-    mc:Ignorable="d">
-    <Grid />
+    Width="400"
+    Height="600"
+    Background="#FF1E1E1E"
+    FontFamily="Segoe UI"
+    Foreground="White">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Верхній рядок  -->
+        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <ComboBox
+                Width="150"
+                Margin="0,0,5,0"
+                Background="#FF2D2D30"
+                Foreground="Black"
+                SelectedIndex="0">
+                <ComboBoxItem Content="main" />
+            </ComboBox>
+            <Button
+                Width="24"
+                Height="24"
+                Margin="0,0,2,0"
+                Background="#FF2D2D30"
+                BorderBrush="Gray"
+                Content="↑"
+                Foreground="White" />
+            <Button
+                Width="24"
+                Height="24"
+                Margin="0,0,2,0"
+                Background="#FF2D2D30"
+                BorderBrush="Gray"
+                Content="↓"
+                Foreground="White" />
+            <Button
+                Width="24"
+                Height="24"
+                Margin="0,0,2,0"
+                Background="#FF2D2D30"
+                BorderBrush="Gray"
+                Content="⟳"
+                Foreground="White" />
+            <Button
+                Width="24"
+                Height="24"
+                Background="#FF2D2D30"
+                BorderBrush="Gray"
+                Content="⋯"
+                Foreground="White" />
+        </StackPanel>
+
+        <!--  Лічильник і перегляд фіксацій  -->
+        <TextBlock
+            Grid.Row="1"
+            Margin="0,8,0,0"
+            Foreground="LightGray"
+            Text="↑ 0 / 0   " />
+        <TextBlock
+            Grid.Row="1"
+            Margin="60,8,0,0"
+            Cursor="Hand"
+            Foreground="#FF3794FF"
+            Text="Просмотреть все фиксации" />
+
+        <!--  Поле повідомлення  -->
+        <StackPanel Grid.Row="2" Margin="0,10,0,0">
+            <TextBox
+                Height="60"
+                AcceptsReturn="True"
+                Background="#FF1E1E1E"
+                BorderBrush="Gray"
+                Foreground="White"
+                Text="Введите сообщение &lt;Обязательно&gt;"
+                TextWrapping="Wrap" />
+            <Button
+                Width="24"
+                Height="24"
+                Margin="0,5,0,0"
+                HorizontalAlignment="Right"
+                Background="#FF2D2D30"
+                BorderBrush="Gray"
+                Content="+" />
+        </StackPanel>
+
+        <!--  Нижня частина  -->
+        <StackPanel Grid.Row="3" Margin="0,10,0,0">
+            <StackPanel Orientation="Horizontal">
+                <ComboBox
+                    Width="200"
+                    Margin="0,0,10,0"
+                    Background="#FF2D2D30"
+                    Foreground="White">
+                    <ComboBoxItem Content="Зафиксировать все" />
+                </ComboBox>
+                <CheckBox
+                    VerticalAlignment="Center"
+                    Content="Исправить"
+                    Foreground="White" />
+            </StackPanel>
+
+            <Expander
+                Margin="0,10,0,0"
+                Background="#FF2D2D30"
+                Foreground="White"
+                Header="Связанные элементы" />
+            <Expander
+                Margin="0,10,0,0"
+                Background="#FF2D2D30"
+                Foreground="White"
+                Header="Изменения"
+                IsExpanded="True">
+                <!--<StackPanel Margin="10,5,0,0" Orientation="Vertical">
+                    <TextBlock Foreground="Gray" Text="В рабочей папке нет неподготовленных изменений." />
+                </StackPanel>-->
+                <TreeView Background="#1E1E1E" Foreground="White">
+                    <TreeView.Resources>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="HeaderTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="White" Text="{Binding}" />
+                                            <StackPanel
+                                                x:Name="HoverPanel"
+                                                Margin="5,0,0,0"
+                                                Orientation="Horizontal"
+                                                Visibility="Collapsed">
+                                                <TextBlock
+                                                    Margin="0,0,5,0"
+                                                    Foreground="White"
+                                                    Text="↺" />
+                                                <TextBlock
+                                                    Margin="0,0,5,0"
+                                                    Foreground="White"
+                                                    Text="+" />
+                                                <TextBlock Foreground="White" Text="M" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsMouseOver}" Value="True">
+                                                <Setter TargetName="HoverPanel" Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TreeView.Resources>
+
+                    <TreeViewItem Header="Z:\Documents\Programmin..." IsExpanded="True">
+                        <TreeViewItem Header="📁 GitUserControlUI" IsExpanded="True">
+                            <TreeViewItem Header="📄 MainWindow.xaml" />
+                        </TreeViewItem>
+                    </TreeViewItem>
+                </TreeView>
+            </Expander>
+            <Expander
+                Margin="0,10,0,0"
+                Background="#FF2D2D30"
+                Foreground="White"
+                Header="Спрятанные изменения" />
+        </StackPanel>
+    </Grid>
 </Window>
